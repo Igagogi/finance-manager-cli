@@ -1,5 +1,5 @@
 """
-Модуль с бизнес-логикой приложения Finance Tracker v2.
+Модуль с бизнес-логикой приложения Finance Tracker CLI.
 """
 
 import csv
