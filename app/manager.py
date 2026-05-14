@@ -136,11 +136,15 @@ class TransactionManager:
             json.dump(data, file, ensure_ascii=False, indent=4)
         
     def load_from_file(self, filename: Path) -> None:
-        """Загружает транзакции из JSON-файла."""
-        with open(filename, 'r', encoding='utf-8') as file:
-            data = json.load(file)
+        """Загружает транзакции из JSON-файла."""    
+        try:
+            with open(filename, 'r', encoding='utf-8') as file:
+                data = json.load(file)
 
-        self.transactions = [Transaction.from_dict(trans) for trans in data]
+            self.transactions = [Transaction.from_dict(trans) for trans in data]
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            self.transactions = []
 
     def save_to_csv(self, filename: Path) -> None:
         """Экспортирует транзакции в CSV-файл."""
